@@ -5,7 +5,7 @@ const HomePage: React.FC = () => {
   return (
     <div>
       <header className={styles.title}>
-        <h1>Your App Name</h1>
+        <h1>SPEED</h1>
       </header>
 
       <nav className={styles.navbar}>
