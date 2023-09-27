@@ -10,11 +10,11 @@ const HomePage: React.FC = () => {
 
       <nav className={styles.navbar}>
         <ul>
-          <li><a href="#">Link 1</a></li>
-          <li><a href="#">Link 2</a></li>
-          <li><a href="#">Link 3</a></li>
-          <li><a href="#">Link 4</a></li>
-          <li><a href="#">Link 5</a></li>
+          <li><a href="#">Submit</a></li>
+          <li><a href="#">Search</a></li>
+          <li><a href="#">Moderator Login</a></li>
+          <li><a href="#">Analyst Login</a></li>
+          <li><a href="#">Admin Login</a></li>
         </ul>
       </nav>
 
