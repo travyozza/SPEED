@@ -1,11 +1,13 @@
 import React from 'react';
 import styles from '../styles/homepage.module.css'; 
+import Link from 'next/link';
 
 const Navbar: React.FC = () => {
+  
   return (
     <nav className={styles.navbar}>
       <ul>
-        <li><a href="#">Submit</a></li>
+      <li><Link href="/submit">Submit</Link></li>
         <li><a href="#">Search</a></li>
         <li><a href="#">Moderator Login</a></li>
         <li><a href="#">Analyst Login</a></li>
