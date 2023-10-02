@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className={styles.navbar}>
       <ul>
-      <li><Link href="/submit">Submit</Link></li>
+      <li><Link href="/submitpage">Submit</Link></li>
         <li><a href="#">Search</a></li>
         <li><a href="#">Moderator Login</a></li>
         <li><a href="#">Analyst Login</a></li>
