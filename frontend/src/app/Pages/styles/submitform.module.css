@@ -1,35 +1,63 @@
-/* SubmitForm.module.css */
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #fff; /* White text for visibility on black background */
+}
 
-.formContainer {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .label {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .inputField {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  .button {
-    background-color: #4caf50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 18px;
-  }
-  
-  .button:hover {
-    background-color: #45a049;
-  }
-  
+.form-input,
+.form-group input[type="text"] {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  color: #333; /* Darker text color for input fields */
+  background-color: #fff; /* White background for input fields */
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-input:focus,
+.form-group input[type="text"]:focus {
+  outline: none;
+  border-color: #4d90fe;
+  box-shadow: 0 0 0 0.2rem rgba(77, 144, 254, 0.25);
+}
+
+.form-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+.form-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+  color: #fff; /* White text color for labels */
+}
+
+.form-group + .form-group {
+  margin-top: 1rem;
+}
