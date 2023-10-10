@@ -1,127 +1,79 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import styles from "../styles/submitform.module.css";
+import React, { useState } from 'react';
 
-export default function SubmitForm() {
-  const router = useRouter();
+interface FormValues {
+  title: string;
+  authors: string;
+  journalName: string;
+  year: number;
+  volume: number;
+  number: number;
+  pages: string;
+  doi: string;
+}
 
-  const [title, setTitle] = useState("");
-  const [authors, setAuthors] = useState("");
-  const [journalName, setJournalName] = useState("");
-  const [yearOfPublication, setYearOfPublication] = useState("");
-  const [volume, setVolume] = useState("");
-  const [number, setNumber] = useState("");
-  const [pages, setPages] = useState("");
-  const [doi, setDoi] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+const initialFormValues: FormValues = {
+  title: '',
+  authors: '',
+  journalName: '',
+  year: 0,
+  volume: 0,
+  number: 0,
+  pages: '',
+  doi: '',
+};
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+const SubmitForm: React.FC = () => {
+  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
-    const article = {
-      title,
-      authors,
-      journalName,
-      yearOfPublication,
-      volume,
-      number,
-      pages,
-      doi,
-    };
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(formValues); // Replace with your submit logic
   };
 
   return (
-    <form>
-      <label className={styles.label}>
+    <form onSubmit={handleSubmit}>
+      <label>
         Title:
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className={styles.input}
-        />
+        <input type="text" name="title" value={formValues.title} onChange={handleChange} />
       </label>
-      <br />
-      <label className={styles.label}>
+      <label>
         Authors:
-        <input
-          type="text"
-          value={authors}
-          onChange={(e) => setAuthors(e.target.value)}
-          className={styles.input}
-        />
+        <input type="text" name="authors" value={formValues.authors} onChange={handleChange} />
       </label>
-      <br />
-      <label className={styles.label}>
+      <label>
         Journal Name:
-        <input
-          type="text"
-          value={journalName}
-          onChange={(e) => setJournalName(e.target.value)}
-          className={styles.input}
-        />
+        <input type="text" name="journalName" value={formValues.journalName} onChange={handleChange} />
       </label>
-      <br />
-      <label className={styles.label}>
-        Year of Publication:
-        <input
-          type="text"
-          value={yearOfPublication}
-          onChange={(e) => setYearOfPublication(e.target.value)}
-          className={styles.input}
-        />
+      <label>
+        Year:
+        <input type="number" name="year" value={formValues.year} onChange={handleChange} />
       </label>
-      <br />
-      <label className={styles.label}>
+      <label>
         Volume:
-        <input
-          type="text"
-          value={volume}
-          onChange={(e) => setVolume(e.target.value)}
-          className={styles.input}
-        />
+        <input type="number" name="volume" value={formValues.volume} onChange={handleChange} />
       </label>
-      <br />
-      <label className={styles.label}>
+      <label>
         Number:
-        <input
-          type="text"
-          value={number}
-          onChange={(e) => setNumber(e.target.value)}
-          className={styles.input}
-        />
+        <input type="number" name="number" value={formValues.number} onChange={handleChange} />
       </label>
-      <br />
-      <label className={styles.label}>
+      <label>
         Pages:
-        <input
-          type="text"
-          value={pages}
-          onChange={(e) => setPages(e.target.value)}
-          className={styles.input}
-        />
+        <input type="text" name="pages" value={formValues.pages} onChange={handleChange} />
       </label>
-      <br />
-      <label className={styles.label}>
+      <label>
         DOI:
-        <input
-          type="text"
-          value={doi}
-          onChange={(e) => setDoi(e.target.value)}
-          className={styles.input}
-        />
+        <input type="text" name="doi" value={formValues.doi} onChange={handleChange} />
       </label>
-      <br />
-      <button
-        type="submit"
-        disabled={isLoading}
-        className={styles.button}
-      >
-        {isLoading ? "Submitting..." : "Submit"}
-      </button>
+      <button type="submit">Submit</button>
     </form>
   );
-}
+};
+
+export default SubmitForm;
