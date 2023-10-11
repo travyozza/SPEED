@@ -1,6 +1,7 @@
 "use client";
-
 import React, { useState } from 'react';
+import styles from '../styles/submitform.module.css'
+import axios from 'axios';
 
 interface FormValues {
   title: string;
@@ -32,46 +33,51 @@ const SubmitForm: React.FC = () => {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(formValues); // Replace with your submit logic
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    try {
+      const res = await axios.post('localhost:8082/articles', formValues);
+      console.log('Article created successfully:', res.data);
+      setFormValues(initialFormValues);
+    } catch (error) {
+      console.error('Failed to create article:', error);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <form className={styles.formContainer} onSubmit={handleSubmit}>
+      <label className={styles.label}>
         Title:
-        <input type="text" name="title" value={formValues.title} onChange={handleChange} />
+        <input className={styles.inputField} type="text" name="title" value={formValues.title} onChange={handleChange} />
       </label>
-      <label>
+      <label className={styles.label}>
         Authors:
-        <input type="text" name="authors" value={formValues.authors} onChange={handleChange} />
+        <input className={styles.inputField} type="text" name="authors" value={formValues.authors} onChange={handleChange} />
       </label>
-      <label>
+      <label className={styles.label}>
         Journal Name:
-        <input type="text" name="journalName" value={formValues.journalName} onChange={handleChange} />
+        <input className={styles.inputField} type="text" name="journalName" value={formValues.journalName} onChange={handleChange} />
       </label>
-      <label>
+      <label className={styles.label}>
         Year:
-        <input type="number" name="year" value={formValues.year} onChange={handleChange} />
+        <input className={styles.inputField} type="number" name="year" value={formValues.year} onChange={handleChange} />
       </label>
-      <label>
+      <label className={styles.label}>
         Volume:
-        <input type="number" name="volume" value={formValues.volume} onChange={handleChange} />
+        <input className={styles.inputField} type="number" name="volume" value={formValues.volume} onChange={handleChange} />
       </label>
-      <label>
+      <label className={styles.label}>
         Number:
-        <input type="number" name="number" value={formValues.number} onChange={handleChange} />
+        <input className={styles.inputField} type="number" name="number" value={formValues.number} onChange={handleChange} />
       </label>
-      <label>
+      <label className={styles.label}>
         Pages:
-        <input type="text" name="pages" value={formValues.pages} onChange={handleChange} />
+        <input className={styles.inputField} type="text" name="pages" value={formValues.pages} onChange={handleChange} />
       </label>
-      <label>
+      <label className={styles.label}>
         DOI:
-        <input type="text" name="doi" value={formValues.doi} onChange={handleChange} />
+        <input className={styles.inputField} type="text" name="doi" value={formValues.doi} onChange={handleChange} />
       </label>
-      <button type="submit">Submit</button>
+      <button className={styles.button} type="submit">Submit</button>
     </form>
   );
 };
