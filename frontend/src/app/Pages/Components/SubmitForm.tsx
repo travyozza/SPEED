@@ -1,7 +1,7 @@
 "use client";
-
 import React, { useState } from 'react';
 import styles from '../styles/submitform.module.css'
+import axios from 'axios';
 
 interface FormValues {
   title: string;
@@ -33,9 +33,14 @@ const SubmitForm: React.FC = () => {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(formValues); // Replace with your submit logic
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    try {
+      const res = await axios.post('localhost:8082/articles', formValues);
+      console.log('Article created successfully:', res.data);
+      setFormValues(initialFormValues);
+    } catch (error) {
+      console.error('Failed to create article:', error);
+    }
   };
 
   return (
