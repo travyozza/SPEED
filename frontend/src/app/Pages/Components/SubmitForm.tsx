@@ -7,7 +7,7 @@ interface FormValues {
   title: string;
   authors: string;
   journalName: string;
-  year: number;
+  yearOfPublication: number;
   volume: number;
   number: number;
   pages: string;
@@ -18,7 +18,7 @@ const initialFormValues: FormValues = {
   title: '',
   authors: '',
   journalName: '',
-  year: 0,
+  yearOfPublication: 0,
   volume: 0,
   number: 0,
   pages: '',
@@ -34,12 +34,12 @@ const SubmitForm: React.FC = () => {
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     try {
-      const res = await axios.post('localhost:8082/articles', formValues);
-      console.log('Article created successfully:', res.data);
-      setFormValues(initialFormValues);
+      const response = await axios.post('http://localhost:8082/articles', formValues);
+      console.log(response.data);
     } catch (error) {
-      console.error('Failed to create article:', error);
+      console.error(error);
     }
   };
 
@@ -59,7 +59,7 @@ const SubmitForm: React.FC = () => {
       </label>
       <label className={styles.label}>
         Year:
-        <input className={styles.inputField} type="number" name="year" value={formValues.year} onChange={handleChange} />
+        <input className={styles.inputField} type="number" name="yearOfPublication" value={formValues.yearOfPublication} onChange={handleChange} />
       </label>
       <label className={styles.label}>
         Volume:
