@@ -5,7 +5,7 @@ import styles from '../styles/searchtable.module.css';
 interface Article {
     id: number;
     title: string;
-    author: string;
+    authors: string[];
     journalName: string;
     yearOfPublication: number;
     volume: number;
@@ -49,7 +49,7 @@ const SearchArticles: React.FC = () => {
                     <thead>
                         <tr>
                             <th>Title</th>
-                            <th>Author</th>
+                            <th>Author(s)</th>
                             <th>Journal Name</th>
                             <th>Year of Publication</th>
                             <th>Volume</th>
@@ -62,7 +62,7 @@ const SearchArticles: React.FC = () => {
                         {searchResults.map((article) => (
                             <tr key={article.doi}>
                                 <td>{article.title}</td>
-                                <td>{article.author}</td>
+                                <td>{article.authors.join(', ')}</td>
                                 <td>{article.journalName}</td>
                                 <td>{article.yearOfPublication}</td>
                                 <td>{article.volume}</td>
