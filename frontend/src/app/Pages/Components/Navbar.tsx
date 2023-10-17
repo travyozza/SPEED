@@ -8,7 +8,7 @@ const Navbar: React.FC = () => {
     <nav className={styles.navbar}>
       <ul>
       <li><Link href="/Pages/SubmitPage">Submit</Link></li>
-        <li><a href="#">Search</a></li>
+        <li><a href="/Pages/Search">Search</a></li>
         <li><a href="#">Moderator Login</a></li>
         <li><a href="#">Analyst Login</a></li>
         <li><a href="#">Admin Login</a></li>
