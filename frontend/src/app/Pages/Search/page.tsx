@@ -1,11 +1,11 @@
 import React from 'react';
-import SearchBar from '../Components/SearchBar';
+import SearchArticles from '../Components/SearchArticles';
 
 const Search = () => {
     return (
         <div>
             <h1>Search SPEED</h1>
-            <SearchBar />
+            <SearchArticles />
         </div>
     );
 };
