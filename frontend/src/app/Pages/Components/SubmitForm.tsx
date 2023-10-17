@@ -36,8 +36,14 @@ const SubmitForm: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
+      const { title, authors, journalName, yearOfPublication, volume, number, pages, doi } = formValues;
+      if (!title || !authors || !journalName || !yearOfPublication || !volume || !number || !pages || !doi) {
+        alert('Please fill out all fields.');
+        return;
+      }
       const response = await axios.post('http://localhost:8082/articles', formValues);
       console.log(response.data);
+      setFormValues(initialFormValues); // Reset the form values to their initial state
     } catch (error) {
       console.error(error);
     }
