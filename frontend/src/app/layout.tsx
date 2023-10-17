@@ -18,13 +18,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <div>
+      <body>
       <header className={styles.title}>
         <h1>SPEED</h1>
       </header>
       <Navbar />
       {children}
-    </div>
+      </body>
     </html>
   )
 }
