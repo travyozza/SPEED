@@ -1,0 +1,38 @@
+/* LoginForm.module.css */
+.form-container {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #000000;
+}
+
+.form-label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.form-input {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: #000000; /* Set the text color */
+    background-color: white;
+}
+
+.form-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.form-button:hover {
+    background-color: #45a049;
+}
