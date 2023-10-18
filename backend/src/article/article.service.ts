@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { Article } from './schemas/article.schema';
+import { Query } from 'express-serve-static-core';
 
 @Injectable()
 export class ArticleService {
@@ -10,8 +11,14 @@ export class ArticleService {
         private articleModel: mongoose.Model<Article>
     ) {}
 
-    async findAll(){
-        const articles = await this.articleModel.find()
+    async findAll(query: Query){
+        const keyword = query.keyword ? { 
+            title:{
+                $regex: query.keyword,
+                $options: 'i',
+            }
+        } : {}
+        const articles = await this.articleModel.find( {...keyword})
         return articles;
     }
 

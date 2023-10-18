@@ -1,15 +1,16 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { Article } from './schemas/article.schema';
 import { CreateArticleDto } from './dto/create-article.dto';
+import { Query as ExpressQuery } from 'express-serve-static-core';
 
 @Controller('articles')
 export class ArticleController {
     constructor(private articleService: ArticleService){}
 
     @Get()
-    async getAllArticles(): Promise<Article[]>{
-        return this.articleService.findAll();
+    async getAllArticles(@Query() query: ExpressQuery ): Promise<Article[]>{
+        return this.articleService.findAll(query);
     }
 
     @Post()
