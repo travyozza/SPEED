@@ -41,11 +41,9 @@ const SearchArticles: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      let endpoint = 'http://localhost:8082/articles';
+      let endpoint = 'http://localhost:8082/articles?';
       if (searchTerm) {
-        endpoint += `title=${encodeURIComponent(searchTerm)}&`;
-        endpoint += `authors=${encodeURIComponent(searchTerm)}&`;
-        endpoint += `journalName=${encodeURIComponent(searchTerm)}`;
+        endpoint += `keyword=${encodeURIComponent(searchTerm)}`;
       }
       const response = await fetch(endpoint);
       const articles = await response.json();
