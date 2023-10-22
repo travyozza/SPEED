@@ -29,6 +29,7 @@ export class ArticleController {
         return this.articleService.findByID(id);
     }
 
+    /*
     @Delete(':id') // DELETE route to delete an article
     async deleteArticle(
         @Param('id') 
@@ -37,6 +38,7 @@ export class ArticleController {
         return this.articleService.delete(id);
     }
 
+    
     @Put(':id') // PUT route to update an article
     async updateArticle(
         @Param('id') 
@@ -45,4 +47,24 @@ export class ArticleController {
     ): Promise<Article>{
         return this.articleService.update(id, article);
     }
+
+    */
+
+    // In your ArticleController
+
+    @Put(':id')
+    async updateAccepted(@Param('id') id: string, @Body('accepted') accepted: boolean): Promise<Article> {
+    return this.articleService.updateAccepted(id, accepted);
+    }
+
+    @Delete(':id')
+    async delete(@Param('id') id: string): Promise<void> {
+    return this.articleService.delete(id);
+    }
+/*
+    @Put(':id')
+    async update(@Param('id') id: string, @Body() article: Article): Promise<Article> {
+    return this.articleService.update(id, article);
+  }
+    */
 }
