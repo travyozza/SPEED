@@ -27,6 +27,10 @@ export class Article {
 
     @Prop({ required: true })
     doi: string;
+
+    @Prop({ required: true, default: false })
+    accepted: boolean;
+    
     }
 
     export const ArticleSchema = SchemaFactory.createForClass(Article);
