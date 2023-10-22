@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
         <li><a href="/Pages/Search">Search</a></li>
         <li><a href="/Pages/Moderator">Moderation </a></li>
         <li><a href="#">Analyst Login</a></li>
-        <li><a href="#">Admin Login</a></li>
+        <li><a href="/Pages/Admin">Admin</a></li>
       </ul>
     </nav>
   );

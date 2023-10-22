@@ -12,6 +12,7 @@ interface Article {
   number: number;
   pages: string;
   doi: string;
+  accepted: boolean;
 }
 
 type SortDirection = 'asc' | 'desc';
@@ -37,7 +38,7 @@ const SearchArticles: React.FC = () => {
     const direction = sortState.column === column && sortState.direction === 'asc' ? 'desc' : 'asc';
     setSortState({ column, direction });
   };
-
+/*
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -49,6 +50,23 @@ const SearchArticles: React.FC = () => {
       const articles = await response.json();
       setSearchResults(articles);
       console.log(searchResults);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+*/
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      let endpoint = 'http://localhost:8082/articles?';
+      if (searchTerm) {
+        endpoint += `keyword=${encodeURIComponent(searchTerm)}`;
+      }
+      const response = await fetch(endpoint);
+      const articles = await response.json();
+      const acceptedArticles = articles.filter((article: Article) => article.accepted);
+      setSearchResults(acceptedArticles);
+      console.log(acceptedArticles);
     } catch (error) {
       console.error(error);
     }

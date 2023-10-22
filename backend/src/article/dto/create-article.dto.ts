@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsArray } from 'class-validator';
+import { IsString, IsNumber, IsArray, IsBoolean } from 'class-validator';
 
 export class CreateArticleDto {
   @IsString()
@@ -24,4 +24,7 @@ export class CreateArticleDto {
 
   @IsString()
   readonly doi: string;
+
+  @IsBoolean()
+  accepted: boolean;
 }
