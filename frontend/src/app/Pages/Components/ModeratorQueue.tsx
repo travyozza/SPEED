@@ -20,26 +20,20 @@ const AllArticles: React.FC = () => {
 
   const handleAccept = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:8082/articles/${id}`, {
+      await fetch(`http://localhost:8082/articles/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ accepted: true }),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Failed to accept article: ${response.statusText}`);
+        }
+        // Update the article in the state
+        setArticles((prevArticles) => prevArticles.filter((article) => article._id !== id));
       });
-  
-      if (!response.ok) {
-        throw new Error(`Failed to accept article: ${response.statusText}`);
-      }
-  
-      const updatedArticle = await response.json();
-  
-      // Update the article in the state
-      setArticles((prevArticles) =>
-        prevArticles.map((article) =>
-          article._id === id ? { ...article, ...updatedArticle } : article
-        )
-      );
     } catch (error) {
       console.error(error);
     }

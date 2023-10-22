@@ -13,6 +13,7 @@ interface Article {
   number: number;
   pages: string;
   doi: string;
+  accepted: boolean;
 }
 
 const AllArticles: React.FC = () => {
@@ -22,7 +23,8 @@ const AllArticles: React.FC = () => {
   const fetchArticles = async () => {
     try {
       const response = await axios.get('http://localhost:8082/articles');
-      const articles = response.data;
+      const articles_all = response.data;
+      const articles = articles_all.filter((articles_all: Article) => articles_all.accepted);
       setArticles(articles);
     } catch (error) {
       console.error(error);
@@ -39,7 +41,7 @@ const AllArticles: React.FC = () => {
       try {
         const updatedArticle = { ...editArticle, [field]: value };
         const response = await axios.put(`http://localhost:8082/articles/${editArticle._id}`, updatedArticle);
-
+  
         if (response.status === 200) {
           setEditArticle(null);
           fetchArticles();
