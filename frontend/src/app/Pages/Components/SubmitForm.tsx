@@ -12,6 +12,7 @@ interface FormValues {
   number: number;
   pages: string;
   doi: string;
+  accepted: boolean;
 }
 
 const initialFormValues: FormValues = {
@@ -23,6 +24,7 @@ const initialFormValues: FormValues = {
   number: 0,
   pages: '',
   doi: '',
+  accepted: false
 };
 
 const SubmitForm: React.FC = () => {
@@ -30,24 +32,24 @@ const SubmitForm: React.FC = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormValues({ ...formValues, [name]: value });
+    setFormValues({ ...formValues, [name]: value});
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    try {
-      const { title, authors, journalName, yearOfPublication, volume, number, pages, doi } = formValues;
-      if (!title || !authors || !journalName || !yearOfPublication || !volume || !number || !pages || !doi) {
-        alert('Please fill out all fields.');
-        return;
-      }
-      const response = await axios.post('http://localhost:8082/articles', formValues);
-      console.log(response.data);
-      setFormValues(initialFormValues); // Reset the form values to their initial state
-    } catch (error) {
-      console.error(error);
+  event.preventDefault();
+  try {
+    const { title, authors, journalName, yearOfPublication, volume, number, pages, doi } = formValues;
+    if (!title || !authors || !journalName || !yearOfPublication || !volume || !number || !pages || !doi) {
+      alert('Please fill out all fields.');
+      return;
     }
-  };
+    const response = await axios.post('http://localhost:8082/articles', formValues);
+    console.log(response.data);
+    setFormValues(initialFormValues); // Reset the form values to their initial state
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   return (
     <form className={styles.formContainer} onSubmit={handleSubmit}>

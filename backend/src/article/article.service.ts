@@ -23,11 +23,15 @@ export class ArticleService {
         return articles;
     }
 
-    async create(article: Article): Promise<Article>{
-        const res = await this.articleModel.create(article)
-        return res;
+    async create(article: CreateArticleDto): Promise<Article> {
+        const createdArticle = new this.articleModel({
+            ...article,
+            accepted: article.accepted ?? false,
+        });
+        return createdArticle.save();
     }
 
+    
     async findByID(id: string): Promise<Article>{
         const article = await this.articleModel.findById(id)
 
