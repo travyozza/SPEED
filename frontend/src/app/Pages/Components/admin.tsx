@@ -4,7 +4,7 @@ import styles from '../styles/searchtable.module.css';
 import axios from 'axios';
 
 interface Article {
-  _id: number;
+  _id: string;
   title: string;
   authors: string[];
   journalName: string;
@@ -52,15 +52,18 @@ const AllArticles: React.FC = () => {
     }
   };
 
-  const handleDeleteArticle = async (articleId: number) => {
+  const handleDeleteArticle = async (id: string) => {
     try {
-      const response = await axios.delete(`http://localhost:8082/articles/${articleId}`);
-      console.log(articleId)
-      if (response.status === 204) {
-        fetchArticles();
-      } else {
-        console.error(response.data);
+      const response = await fetch(`http://localhost:8082/articles/${id}`, {
+        method: 'DELETE',
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to delete article: ${response.statusText}`);
       }
+  
+      // Remove the article from the state
+      setArticles((prevArticles) => prevArticles.filter((article) => article._id !== id));
     } catch (error) {
       console.error(error);
     }
